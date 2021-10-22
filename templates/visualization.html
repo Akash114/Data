@@ -1,5 +1,8 @@
 <!DOCTYPE html>
+{% extends 'base.html' %}
+
 {% load static %}
+{% block content %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -48,12 +51,11 @@ body.loading .modal {
 
 </style>
 
-<script src={% static "/js/charts.js" %}></script>
 
 </head>
 <body style="background-color:#F5F5F5">
-<div class="container">
-    <div class="card">
+<div class="">
+    <div class="">
 {% load crispy_forms_tags %}
     <h3>Visualize your data in few steps.</h3>
 {% csrf_token %}
@@ -86,7 +88,7 @@ body.loading .modal {
                     <button type="button" class="btn btn-primary" id='two-variable-btn' style="display: None;margin-top: 40px;margin-bottom: 40px;" onclick="two_variables(event)">Visualize</button>
                     <button type="button" class="btn btn-primary" id='single-variable-btn' style="display: None;margin-top: 40px;margin-bottom: 40px;" onclick="visual(event)">Visualize</button>
                 <div id ="chartContainer">
-                <canvas id="chart" width="700" height="500" style="display: None"></canvas>
+                <canvas id="chart" width="auto" height="auto" style="display: None"></canvas>
                 </div>
             </form>
 
@@ -97,3 +99,4 @@ body.loading .modal {
 
 </body>
 </html>
+{% endblock %}

@@ -9,5 +9,4 @@ urlpatterns = [
     url('visualize',views.visualize,name='visualize'),
     url('two_variables',views.two_variables,name='two_variables'),
     url('menu',views.menu,name='menu'),
-
 ]

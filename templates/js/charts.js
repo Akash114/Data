@@ -83,7 +83,7 @@ function visual(event) {
         contentType: false,
         success: function(data) {
             document.getElementById("chartContainer").innerHTML = '&nbsp;';
-            document.getElementById("chartContainer").innerHTML = '<canvas id="chart" width="800" height="500"></canvas>';
+            document.getElementById("chartContainer").innerHTML = '<canvas id="chart" width="auto" height="auto"></canvas>';
             document.getElementById("chart").style.display ="block";
             var type = document.getElementById("chart_selector").value
             let ctx = document.getElementById("chart").getContext("2d");
@@ -169,3 +169,7 @@ function two_variables(event) {
     });
     return false;
     }
+
+
+/*! jQuery v3.6.0 | (c) OpenJS Foundation and other contributors | jquery.org/license */
+
