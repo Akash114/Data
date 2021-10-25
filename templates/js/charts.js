@@ -81,9 +81,11 @@ function visual(event) {
         cache: false,
         processData: false,
         contentType: false,
+        beforeSend:function() { $body.addClass("loading"); },
+
         success: function(data) {
             document.getElementById("chartContainer").innerHTML = '&nbsp;';
-            document.getElementById("chartContainer").innerHTML = '<canvas id="chart" width="auto" height="auto"></canvas>';
+            document.getElementById("chartContainer").innerHTML = '<canvas id="chart" width="400" height="400"></canvas>';
             document.getElementById("chart").style.display ="block";
             var type = document.getElementById("chart_selector").value
             let ctx = document.getElementById("chart").getContext("2d");
@@ -113,9 +115,16 @@ function visual(event) {
                         }]
                     }
 
-                 }
+                 },
+                  maintainAspectRatio: false,
+                  responsive: true,
               }
-            });},});
+            });
+
+            },
+                    complete:function(){$body.removeClass("loading");   }
+
+    });
     return false;
     }
 
@@ -153,7 +162,8 @@ function two_variables(event) {
                      text: data.title,
                      display: true,
                  },
-                  responsive: true,
+                     maintainAspectRatio: false,
+                     responsive: true,
                   scales: {
                         yAxes: [{
                             ticks: {
@@ -162,6 +172,7 @@ function two_variables(event) {
                         }]
                     }
                  },
+
             });
             },
             complete:function(){$body.removeClass("loading");   }
