@@ -32,7 +32,10 @@ function upload(event) {
 
             }
         },
-        complete:function(){$body.removeClass("loading");   }
+        complete:function(){$body.removeClass("loading");   },
+        error:function (){
+            alert("There is some problem occurred while processing your file. Kindly check your.");
+        }
 
     });
 
@@ -131,7 +134,10 @@ function visual(event) {
             });
 
             },
-                    complete:function(){$body.removeClass("loading");   }
+                    complete:function(){$body.removeClass("loading");   },
+                    error:function (){
+            alert("There is some problem occurred while processing your file. Kindly check your.");
+        }
 
     });
     return false;
@@ -184,7 +190,11 @@ function two_variables(event) {
 
             });
             },
-            complete:function(){$body.removeClass("loading");   }
+            complete:function(){$body.removeClass("loading");   },
+                    error:function (){
+            alert("There is some problem occurred while processing your file. Kindly check your.");
+        }
+
 
     });
     return false;
