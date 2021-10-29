@@ -11,8 +11,6 @@ colorPalette = ['#55efc4', '#81ecec', '#a29bfe', '#ffeaa7', '#fab1a0', '#ff7675'
 colorPrimary, colorSuccess, colorDanger = '#79aec8', colorPalette[0], colorPalette[5]
 
 
-
-
 # Home page
 def home(request):
     form = Form.FileUploadForm()
@@ -61,25 +59,25 @@ def visualize(request):
         form = Form.FileUploadForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             df = read_file(request)
-            column = request.POST['columns']
-            data_dict = dict(df[column].value_counts())
+            label_column = request.POST['label']
+            value_column = request.POST['value']
 
-            data = {k: v for k, v in data_dict.items() if k == k}
+            labels = list(df[label_column])
+            values = list(df[value_column])
+
             fake = Factory.create()
             bg_color = []
-            for i in range(len(data)):
+            for i in range(len(labels)):
                 bg_color.append(fake.hex_color())
-            # First 20 results
-            if len(data) > 20:
-                data = dict(sorted(data.items(), key=lambda x: x[1], reverse=True))
-                data = dict(itertools.islice(data.items(), 20))
+
             return JsonResponse({
-                'title': f' {column}',
+                'title': f'{label_column} vs {value_column}',
                 'data': {
-                    'labels': list(data.keys()),
+                    'name':value_column,
+                    'labels': list(labels),
                     'backgroundColor': bg_color,
                     'borderColor': colorPrimary,
-                    'data': list(data.values()),
+                    'data': list(values),
                 },
             }, encoder=NpEncoder)
         return HttpResponse(json.dumps({'msg': 'Something went wrong!'}), content_type="application/json")
@@ -92,37 +90,34 @@ def two_variables(request):
         form = Form.FileUploadForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             df = read_file(request)
-            column = request.POST['columns']
-            column2 = request.POST['columns2']
-            district = list(df[column].unique())
-            data = {}
-            for i in district:
-                df_final = df[df[column] == i]
-                data[i] = dict(df_final[column2].value_counts())
+            label_column = request.POST['label']
+            value_column_1 = request.POST['value']
+            value_column_2 = request.POST['value2']
+            labels = list(df[label_column])
+            values_1 = list(df[value_column_1])
+            values_2 = list(df[value_column_2])
 
-            # second variables dataset
-            final_data = {}
-            for i in df[column2].unique():
-                l = []
-                for j in data:
-                    try:
-                        l.append(data[j][i])
-                    except:
-                        l.append(0)
-                final_data[i] = l
 
-            # Removing None Values
-            final_data = {k: v for k, v in final_data.items() if k == k}
 
             dataset = []
-            for key in final_data:
-                dic = {'label': key, 'backgroundColor': fake.hex_color(), 'borderColor': '#79AEC8',
-                       'data': final_data[key]}
-                dataset.append(dic)
+
+            value_column_1_dict = {
+                'label': value_column_1,
+                'backgroundColor': "blue",
+                'data': values_1
+            }
+            value_column_2_dict = {
+                'label': value_column_2,
+                'backgroundColor': "red",
+                'data': values_2
+            }
+            dataset.append(value_column_1_dict)
+            dataset.append(value_column_2_dict)
+
             return JsonResponse({
-                'title': f' {column}',
+                'title': f' {value_column_1} and {value_column_2} vs {label_column}',
                 'data': {
-                    'labels': list(data.keys()),
+                    'labels': labels,
                     'dataset': dataset
                 },
             }, encoder=NpEncoder)

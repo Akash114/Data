@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Data Visualization</title>
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -73,18 +73,23 @@ body.loading .modal {
 
                 <select id="selector" name="selector" style="display:None;margin-bottom: 30px" onchange="choice()">
                     <option>Select Type Of Visualization</option>
-                    <option value="single">Single Variable(i.e,Gender distribution in Gender column.)</option>
-                    <option value="two">Two Variable(i.e,Gender distribution in different state.)</option>
+                    <option value="single">Single Variable(i.e,Confirmed case in a state)</option>
+                    <option value="two">Two Variable(i.e,Confirmed as well as Active case in a state)</option>
                 </select>
 
 
-
-                    <select  id ="columns" name="columns" class="form-control input-lg" style="display: None">
-                        <option>Select Column from first raw</option>
+                    <select  id ="columns" name="label" class="form-control input-lg" style="display: None">
+                        <option>Select Label Column from first raw</option>
                     </select><br>
-                    <select id ="columns2" name="columns2" class="form-control input-lg" style="display: None">
-                        <option>Select Column from first raw</option>
+                    <select id ="columns2" name="value" class="form-control input-lg" style="display: None">
+                        <option>Select Value Column from first raw</option>
+                    </select><br>
+
+                   <select id ="columns3" name="value2" class="form-control input-lg" style="display: None">
+                        <option>Select Value Column from first raw</option>
                     </select>
+
+
                     <button type="button" id='two-variable-btn' style="display: None;margin-top: 40px;margin-bottom: 40px;" onclick="two_variables(event)">Visualize</button>
                     <button type="button" id='single-variable-btn' style="display: None;margin-top: 40px;margin-bottom: 40px;" onclick="visual(event)">Visualize</button>
                 <div id ="chartContainer">

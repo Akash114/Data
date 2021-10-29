@@ -47438,3 +47438,16 @@ object-position: center center;
 color: #000;
 text-decoration: none;
 }
+
+.site-title, .site-description { position: absolute; clip: rect(1px, 1px, 1px, 1px); }
+.theme-page-header-area {
+				background: #17212c url(https://analytics.in/wp-content/uploads/2021/09/analytics-banner.png);
+				background-attachment: scroll;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+				background-attachment: fixed;
+			}
+@media (min-width: 600px){
+                .navbar-fixed{top:32px;}
+            }

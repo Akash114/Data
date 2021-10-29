@@ -26,6 +26,10 @@ function upload(event) {
                     $('#columns2').append(`<option value="${data.data[i]}">
                                            ${data.data[i]}
                                       </option>`)
+                    $('#columns3').append(`<option value="${data.data[i]}">
+                       ${data.data[i]}
+                  </option>`)
+
             }
         },
         complete:function(){$body.removeClass("loading");   }
@@ -41,7 +45,8 @@ function chart_choice(){
        document.getElementById("selector").style.display ="None";
        document.getElementById("two-variable-btn").style.display ="None";
        document.getElementById("columns").style.display ="block";
-       document.getElementById("columns2").style.display ="None";
+       document.getElementById("columns2").style.display ="block";
+       document.getElementById("columns3").style.display ="None";
        document.getElementById("single-variable-btn").style.display ="block";
 
    }
@@ -59,13 +64,17 @@ function choice() {
        document.getElementById("single-variable-btn").style.display ="block";
        document.getElementById("two-variable-btn").style.display ="None";
        document.getElementById("columns").style.display ="block";
-       document.getElementById("columns2").style.display ="None";
+       document.getElementById("columns2").style.display ="block";
+       document.getElementById("columns3").style.display ="None";
+
    }
    if(value === 'two'){
        document.getElementById("single-variable-btn").style.display ="None";
        document.getElementById("two-variable-btn").style.display ="block";
        document.getElementById("columns").style.display ="block";
        document.getElementById("columns2").style.display ="block";
+       document.getElementById("columns3").style.display ="block";
+
    }
 };
 
@@ -96,7 +105,7 @@ function visual(event) {
                  labels: data.data.labels,
                  datasets: [
                     {
-                      label: 'Count',
+                      label: data.data.name,
                       backgroundColor: data.data.backgroundColor,
                         borderColor: "#417690",
                       data: data.data.data
