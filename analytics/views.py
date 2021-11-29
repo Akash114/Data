@@ -1,3 +1,4 @@
+from django.contrib.auth import logout
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
 from . import Form
@@ -6,6 +7,9 @@ import json
 import itertools
 import numpy as np
 from faker import Factory
+import io
+import matplotlib.pyplot as plt
+
 
 colorPalette = ['#55efc4', '#81ecec', '#a29bfe', '#ffeaa7', '#fab1a0', '#ff7675', '#fd79a8']
 colorPrimary, colorSuccess, colorDanger = '#79aec8', colorPalette[0], colorPalette[5]
@@ -32,14 +36,24 @@ def read_file(request):
 
 # Get the column name from first raw
 def get_columns(request):
-    if request.method == 'POST':
+    if request.is_ajax():
         form = Form.FileUploadForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             df = read_file(request)
+            fig, ax = plt.subplots(1, figsize=(5, 5))
+            ax.axis('off')
+            ax.set_title('Uploaded File ',
+                         fontdict={'fontsize': '15', 'fontweight': '3'})
+            ax.table(cellText=df.head().values, colLabels=df.columns, loc="center")
+            imgdata = io.StringIO()
+            fig.figure.savefig(imgdata, format='svg')
+            imgdata.seek(0)
             column = list(df.columns)
-            return HttpResponse(json.dumps({'data': column, 'msg': 'File Uploaded'}), content_type="application/json")
+            return HttpResponse(json.dumps({'data': column, 'msg': 'File Uploaded','img':imgdata.getvalue()}), content_type="application/json")
         else:
             return HttpResponse(json.dumps({'msg': form.errors}), content_type="application/json")
+    else:
+        return HttpResponse(json.dumps({'msg': 'Login Required'}), content_type="application/json")
 
 
 class NpEncoder(json.JSONEncoder):
@@ -125,3 +139,9 @@ def two_variables(request):
 
 def menu(request):
     return render(request,'menu.html')
+
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/')
+    # Redirect to a success page.

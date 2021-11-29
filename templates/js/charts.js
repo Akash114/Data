@@ -13,14 +13,14 @@ function upload(event) {
         contentType: false,
         success: function(data) {
 
-            alert(data.msg)
-            if(data.msg !== 'File Uploaded'){
-                return
-            }
-            document.getElementById("chart_selector").style.display ="block";
-            for(i=0;i<data.data.length;++i)
-            {
-                   $('#columns').append(`<option value="${data.data[i]}">
+                alert(data.msg);
+
+                if (data.msg !== 'File Uploaded') {
+                    return
+                }
+                document.getElementById("chart_selector").style.display = "block";
+                for (i = 0; i < data.data.length; ++i) {
+                    $('#columns').append(`<option value="${data.data[i]}">
                                            ${data.data[i]}
                                       </option>`)
                     $('#columns2').append(`<option value="${data.data[i]}">
@@ -30,15 +30,18 @@ function upload(event) {
                        ${data.data[i]}
                   </option>`)
 
+                }
             }
-        },
-        complete:function(){$body.removeClass("loading");   },
-        error:function (){
-            alert("There is some problem occurred while processing your file. Kindly check your.");
-        }
+        ,
+            complete:function () {
+                $body.removeClass("loading");
+            }
+        ,
+            error:function () {
+                alert("There is some problem occurred while processing your file. Kindly check your.");
+            }
 
     });
-
     return false;
     }
 
