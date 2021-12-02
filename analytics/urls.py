@@ -10,5 +10,6 @@ urlpatterns = [
     url('two_variables',views.two_variables,name='two_variables'),
     url('menu',views.menu,name='menu'),
     url(r'^logout/$', views.logout_view, name='logout'),
+    url('preview',views.preview_link,name="preview")
 
 ]

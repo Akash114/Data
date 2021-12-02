@@ -94,7 +94,7 @@ body.loading .modal {
 </style>
 
 </head>
-<body style="background-color:#F5F5F5">
+<body>
 <div class="">
     <div class="">
 
@@ -108,10 +108,38 @@ body.loading .modal {
 {% csrf_token %}
 
             <form action="" method="post" id="file-upload-form" enctype="multipart/form-data" style="margin-top: 30px">
+            <div class="row" style="display: flex">
+            <div class="col-lg-3">
                 {% csrf_token %}
                 {{ form|crispy }}
-                <button type="button" id='upload-btn' style="margin-top: 40px;margin-bottom: 40px;" onclick="upload(event)">Upload</button><br/>
+                <p style="color: red">*Supported Formats are CSV and Excel</p>
 
+            </div>
+
+                <div class="col-lg-2" style="margin-top: 35px;">
+
+                <a id="preview" href="#" style="display: none" onclick="preview(event)">Click hear to View</a>
+            </div>
+
+            </div>
+
+                <div class="row" style="display: flex">
+
+                                                        <div class="col-lg-6" id="chart_preview">
+
+
+                                    <button type="button" id='upload-btn' style="margin-top: 40px;margin-bottom: 40px;" onclick="upload(event)">Upload</button><br/>
+                                                        </div>
+                                    <div class="col-lg-6" id="chart_preview">
+
+                    <div id ="demoChartContainer">
+                        <canvas id="demoChart" style="display: None"></canvas>
+                    </div>
+
+
+                </div>
+
+                </div>
 
 
                 <select id="chart_selector" style="display:None;margin-bottom: 30px" onchange="chart_choice()">
@@ -129,14 +157,14 @@ body.loading .modal {
 
 
                     <select  id ="columns" name="label" class="form-control input-lg" style="display: None">
-                        <option>Select Label Column from first raw</option>
+                        <option>Select X Axis variable Column from first raw</option>
                     </select><br>
                     <select id ="columns2" name="value" class="form-control input-lg" style="display: None">
-                        <option>Select Value Column from first raw</option>
+                        <option>Select Y Axis variable Column from first raw</option>
                     </select><br>
 
                    <select id ="columns3" name="value2" class="form-control input-lg" style="display: None">
-                        <option>Select Value Column from first raw</option>
+                        <option>Select Y Axis variable-2 from first raw</option>
                     </select>
 
 
@@ -156,7 +184,7 @@ body.loading .modal {
      <form class="form-container">
        <h5>Kindly Login to Analyse your Data</h5><br/>
 
-         <button class="button" style="margin-top: 20px;" onclick="location.href='{% url 'social:begin' 'google-oauth2' %}'" type="button">Login with Google</button><br/>
+             <button class="button" style="margin-top: 20px;" onclick="location.href='{% url 'social:begin' 'google-oauth2' %}'" type="button">Login with Google</button><br/>
 
       </form>
     </div>

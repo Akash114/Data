@@ -34,6 +34,21 @@ def read_file(request):
     return df
 
 
+def style_line(s):
+    '''Rendering odd and even rows with different color'''
+    return ['background-color: #D4E6F1' if i%2!=0 else 'background-color: #85C1E9' for i in range(len(s))]
+
+
+def preview_link(request):
+    if request.is_ajax():
+        form = Form.FileUploadForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            df = read_file(request)
+            df = df.head(100).style.apply(style_line).render()
+            print(df)
+            return HttpResponse(json.dumps({'html': df}), content_type="application/json")
+
+
 # Get the column name from first raw
 def get_columns(request):
     if request.is_ajax():

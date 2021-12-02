@@ -16,7 +16,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ SECRET_KEY = 'django-insecure-z0-bdh@pv4$!*(t^-duk4jpokb(m5!gg1e^6w9&unn@tsvkj*l
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -41,14 +39,13 @@ INSTALLED_APPS = [
     'analytics.apps.AnalyticsConfig',
     'crispy_forms',
     'social_django',
-
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -78,7 +75,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Data.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -101,8 +97,6 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.user.user_details',
 )
 
-
-
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.open_id.OpenIdAuth',
     'social_core.backends.google.GoogleOAuth2',
@@ -111,7 +105,6 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
-
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
@@ -123,7 +116,6 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '487641605079-q2gqi7jvrdofj6ivmpnbtd6rpkv8ug2q.a
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -143,7 +135,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -157,16 +148,14 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/templates/'
 
 STATICFILES_DIRS = [
-			os.path.join(BASE_DIR, 'templates'),
-		]
-
+    os.path.join(BASE_DIR, 'templates'),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
