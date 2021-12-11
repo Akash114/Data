@@ -1,19 +1,38 @@
-function preview_chart(type){
+function change_label(){
+    var type = document.getElementById("chart_selector").value
+    var label = document.getElementById("columns").value
+    var value = document.getElementById("columns2").value
+    var title = label + " vs " + value
+
+    if(type === 'bar'){
+        var selector = document.getElementById("selector").value
+        if(selector === 'two'){
+                type= 'two'
+                var value2 = document.getElementById("columns3").value
+                var title = label + " vs " + value + " and " + value2
+        }
+    }
+    preview_chart(title,label,type,value,value2)
+
+}
+
+
+function preview_chart(title,label,type,value,value2){
 
         if(type === 'two'){
             type = 'bar'
 
             var data = {
-                labels: ['Gujarat', 'MP', 'Delhi', 'Chennai'],
+                labels: [label+'-1', label+'-2', label+'-3', label+'-4'],
     datasets: [
         {
-            label: "Confirm",
+            label: value,
             backgroundColor: "Red",
             data: [30,70,40,20]
         },
 
         {
-            label: "Recovered",
+            label: value2,
             backgroundColor: "green",
             data: [30,50,60,40]
         }
@@ -27,9 +46,10 @@ function preview_chart(type){
                 type = 'bar';
             }
             var data = {
-                labels: ['Gujarat', 'MP', 'Delhi', 'Chennai'],
+                labels: [label+'-1', label+'-2', label+'-3', label+'-4'],
                 datasets: [
                     {
+                        label:value,
                         data: [50, 55, 60, 33],
                         backgroundColor: [
                             "#4b77a9",
@@ -43,11 +63,11 @@ function preview_chart(type){
                };
         }
 
-    demo_chart(type,data)
+    demo_chart(type,data,title)
 }
 
 
-function demo_chart(type,data){
+function demo_chart(type,data,title){
 
            document.getElementById("demoChartContainer").innerHTML = '&nbsp;';
             document.getElementById("demoChartContainer").innerHTML = '<canvas id="demoChart" width="200" height="200"></canvas>';
@@ -60,7 +80,7 @@ function demo_chart(type,data){
                     data: data,
                     options: {
                         title: {
-                            text: 'City(X- column) Vs Confirmed Cases (Y- column)',
+                            text: title,
                             display: true,
                             scales: {
                                 yAxes: [{
@@ -169,7 +189,7 @@ function chart_choice(){
        document.getElementById("columns2").style.display ="block";
        document.getElementById("columns3").style.display ="None";
        document.getElementById("single-variable-btn").style.display ="block";
-       preview_chart(value)
+       preview_chart('X Axis variable vs Y Axis variable','X Axis variable',value,'Y Axis variable','Y Axis variable-2')
 
    }
    if(value === 'bar'){
@@ -189,7 +209,7 @@ function choice() {
        document.getElementById("columns").style.display ="block";
        document.getElementById("columns2").style.display ="block";
        document.getElementById("columns3").style.display ="None";
-       preview_chart(value)
+       preview_chart('X Axis variable vs Y Axis variable','X Axis variable',value,'Y Axis variable','Y Axis variable-2')
 
 
    }
@@ -199,7 +219,7 @@ function choice() {
        document.getElementById("columns").style.display ="block";
        document.getElementById("columns2").style.display ="block";
        document.getElementById("columns3").style.display ="block";
-       preview_chart(value)
+       preview_chart('X Axis variable vs Y Axis variable','X Axis variable',value,'Y Axis variable','Y Axis variable-2')
 
 
    }

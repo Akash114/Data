@@ -151,19 +151,19 @@ body.loading .modal {
 
                 <select id="selector" name="selector" style="display:None;margin-bottom: 30px" onchange="choice()">
                     <option>Select Type Of Visualization</option>
-                    <option value="single">Single Variable(i.e,Confirmed case in a state)</option>
-                    <option value="two">Two Variable(i.e,Confirmed as well as Active case in a state)</option>
+                    <option value="single">Single Variable</option>
+                    <option value="two">Two Variable</option>
                 </select>
 
 
                     <select  id ="columns" name="label" class="form-control input-lg" style="display: None">
                         <option>Select X Axis variable Column from first raw</option>
                     </select><br>
-                    <select id ="columns2" name="value" class="form-control input-lg" style="display: None">
+                    <select id ="columns2" name="value" class="form-control input-lg" style="display: None" onchange="change_label()">
                         <option>Select Y Axis variable Column from first raw</option>
                     </select><br>
 
-                   <select id ="columns3" name="value2" class="form-control input-lg" style="display: None">
+                   <select id ="columns3" name="value2" class="form-control input-lg" style="display: None" onchange="change_label()">
                         <option>Select Y Axis variable-2 from first raw</option>
                     </select>
 
